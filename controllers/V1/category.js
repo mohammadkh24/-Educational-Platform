@@ -1,5 +1,5 @@
-const categoryModel = require("../models/category");
-const categoryValidation = require("../validators/category");
+const categoryModel = require("../../models/category");
+const categoryValidation = require("../../validators/category");
 const { isValidObjectId } = require("mongoose");
 
 exports.getAll = async (req, res) => {

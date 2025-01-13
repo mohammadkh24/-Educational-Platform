@@ -20,7 +20,7 @@ const schema = mongoose.Schema(
     },
     course: {
       type: mongoose.Types.ObjectId,
-      ref: "course",
+      ref: "Course",
     },
   },
   { timestamps: true }

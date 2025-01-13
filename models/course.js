@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { create } = require("../controllers/category");
 
 const schema = mongoose.Schema(
   {
@@ -23,13 +22,14 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
-    href: {
+    price: {
       type: Number,
       required: true,
     },
     status: {
       type: String,
-      required: true,
+      enum: ["پیش فروش", "درحال ضبط" , "اتمام ضبط"],
+      default: "اتمام ضبط",
     },
     discount: {
       type: Number,
@@ -37,29 +37,29 @@ const schema = mongoose.Schema(
     },
     categoryID: {
       type: mongoose.Types.ObjectId,
-      ref: "category",
+      ref: "categories",
       required: true,
     },
     creator: {
       type: mongoose.Types.ObjectId,
-      ref: "User",
+      ref: "users",
       required: true,
     },
   },
   { timestamps: true }
 );
 
-schema.virtual('sessions' , {
-    ref : 'session',
-    localField : "_id",
-    foreignField : "course"
-})
+schema.virtual("sessions", {
+  ref: "session",
+  localField: "_id",
+  foreignField: "course",
+});
 
-schema.virtual('comments' , {
-    ref : 'comment',
-    localField : "_id",
-    foreignField : "course"
-})
+schema.virtual("comments", {
+  ref: "comment",
+  localField: "_id",
+  foreignField: "course",
+});
 
 const model = mongoose.model("Course", schema);
 

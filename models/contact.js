@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
   {
-    username: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
@@ -13,25 +9,23 @@ const schema = mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
     },
     phone: {
       type: String,
-      require: true,
+      required: true,
     },
-    role: {
+    answer: {
+      type: Number,
+      required: true,
+    },
+    body: {
       type: String,
-      enum: ["ADMIN", "USER"],
-      default: "USER",
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const model = mongoose.model('User' , schema);
+const model = mongoose.model("Contact", schema);
 
 module.exports = model;

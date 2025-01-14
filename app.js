@@ -10,7 +10,8 @@ const commentsRouter = require("./routes/V1/comment");
 const contactsRouter = require("./routes/V1/contact");
 const newsletterRouter = require("./routes/V1/newsletter");
 const searchRouter = require("./routes/V1/search");
-const notificationRoter = require("./routes/V1/notification")
+const notificationRoter = require("./routes/V1/notification");
+const offRouter = require("./routes/V1/off");
 
 const app = express();
 
@@ -29,12 +30,13 @@ app.use(bodyParser.json());
 app.use("/v1/auth", authRouter);
 app.use("/v1/users", usersRouter);
 app.use("/v1/categories", categoryRouter);
-app.use("/v1/courses" , coursesRouter);
-app.use("/v1/comments" , commentsRouter);
-app.use("/v1/contacts" , contactsRouter);
-app.use("/v1/newsletter" , newsletterRouter)
-app.use("/v1/search" , searchRouter)
-app.use("/v1/notif" , notificationRoter)
+app.use("/v1/courses", coursesRouter);
+app.use("/v1/comments", commentsRouter);
+app.use("/v1/contacts", contactsRouter);
+app.use("/v1/newsletter", newsletterRouter);
+app.use("/v1/search", searchRouter);
+app.use("/v1/notif", notificationRoter);
+app.use("/v1/off" , offRouter)
 
 // Not Found Page
 app.use((req, res) => {
@@ -45,6 +47,5 @@ app.use((req, res) => {
     },
   });
 });
-
 
 module.exports = app;

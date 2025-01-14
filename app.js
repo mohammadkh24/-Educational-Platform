@@ -12,6 +12,7 @@ const newsletterRouter = require("./routes/V1/newsletter");
 const searchRouter = require("./routes/V1/search");
 const notificationRoter = require("./routes/V1/notification");
 const offRouter = require("./routes/V1/off");
+const articleRouter = require("./routes/V1/article");
 
 const app = express();
 
@@ -36,7 +37,8 @@ app.use("/v1/contacts", contactsRouter);
 app.use("/v1/newsletter", newsletterRouter);
 app.use("/v1/search", searchRouter);
 app.use("/v1/notif", notificationRoter);
-app.use("/v1/off" , offRouter)
+app.use("/v1/off", offRouter);
+app.use("/v1/articles", articleRouter);
 
 // Not Found Page
 app.use((req, res) => {

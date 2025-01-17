@@ -14,15 +14,17 @@ router
 router.route("/user").get(authMiddleware, ticketController.userTicket);
 
 router.route("/departments").get(ticketController.departments);
-router.route("/departments-subs/:id").get(ticketController.departmentsSubs);
+
+router.route("/departments/:id/subs").get(ticketController.departmentsSubs);
+
 router
   .route("/answer")
   .post(authMiddleware, isAdminMiddleware, ticketController.setAnswer);
-router
-  .route("/:id/answer")
-  .post(authMiddleware, ticketController.getAnswer);
 
-router.route("/:id").delete(authMiddleware , isAdminMiddleware , ticketController.remove)
-  
+router.route("/:id/answer").get(authMiddleware, ticketController.getAnswer);
+
+router
+  .route("/:id")
+  .delete(authMiddleware, isAdminMiddleware, ticketController.remove);
 
 module.exports = router;

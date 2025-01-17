@@ -13,6 +13,10 @@ const schema = mongoose.Schema(
       ref: "DepartmentSub",
       required: true,
     },
+    title: {
+        type : String,
+        required : true
+    },
     priority: {
       type: Number,
       required: true,
@@ -30,10 +34,17 @@ const schema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    isAnswer: {
+      type: Number,
+      required: true,
+    },
     course: {
       type: mongoose.Types.ObjectId,
       ref: "Course",
     },
+    ticketID : {
+        type : String
+    }
   },
   { timestamps: true }
 );

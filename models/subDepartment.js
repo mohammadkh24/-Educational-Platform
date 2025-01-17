@@ -9,6 +9,7 @@ const schema = mongoose.Schema(
     parent: {
       type: mongoose.Types.ObjectId,
       ref: "Department",
+      alias: 'parentID',
     },
   },
   { timestamps: true }

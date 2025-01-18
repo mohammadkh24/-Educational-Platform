@@ -4,7 +4,80 @@ const courseUserModel = require("../../models/course-user");
 const categoryModel = require("../../models/category");
 const commentsModel = require("../../models/comment");
 const { isValidObjectId } = require("mongoose");
-const { answer } = require("./comment");
+
+exports.getAllCourses = async (req, res) => {
+  try {
+    // دریافت همه دوره‌ها با اطلاعات مرتبط
+    const courses = await courseModel
+      .find({})
+      .populate("categoryID", "title") // فقط فیلد title از دسته‌بندی را بگیر
+      .populate("creator", "name") // فقط فیلد name از ایجادکننده را بگیر
+      .lean()
+      .sort({ _id: -1 });
+
+    // دریافت تمام ثبت‌نام‌ها و نظرات
+    const registers = await courseUserModel.find({}).lean();
+    const comments = await commentsModel.find({}).lean();
+
+    // گروه‌بندی ثبت‌نام‌ها بر اساس courseId
+    const registerMap = registers.reduce((map, register) => {
+      const courseId = register.course.toString();
+      if (!map[courseId]) {
+        map[courseId] = [];
+      }
+      map[courseId].push(register);
+      return map;
+    }, {});
+
+    // گروه‌بندی نظرات بر اساس courseId
+    const commentMap = comments.reduce((map, comment) => {
+      const courseId = comment.course.toString();
+      if (!map[courseId]) {
+        map[courseId] = [];
+      }
+      map[courseId].push(comment);
+      return map;
+    }, {});
+
+    // محاسبه اطلاعات هر دوره
+    const allCourses = courses.map((course) => {
+      const courseId = course._id.toString();
+
+      // ثبت‌نام‌های مرتبط با این دوره
+      const courseRegisters = registerMap[courseId] || [];
+
+      // نظرات مرتبط با این دوره
+      const courseComments = commentMap[courseId] || [];
+
+      // محاسبه امتیاز کل و میانگین
+      const totalScore = courseComments.reduce(
+        (sum, comment) => sum + Number(comment.score || 0),
+        0
+      );
+      const averageScore = courseComments.length
+        ? Math.floor(totalScore / courseComments.length)
+        : 5; // امتیاز پیش‌فرض 5 در صورت نبود نظرات
+
+      return {
+        ...course,
+        category: course.categoryID?.title || "بدون دسته‌بندی",
+        creator: course.creator?.name || "نامشخص",
+        registers: courseRegisters.length,
+        averageScore,
+      };
+    });
+
+    // ارسال پاسخ
+    return res.json(allCourses);
+  } catch (error) {
+    // مدیریت خطا
+    console.error("Error fetching courses:", error);
+    res.status(500).json({
+      message: "An error occurred while fetching courses",
+      error: error.message,
+    });
+  }
+};
 
 exports.create = async (req, res) => {
   const {
@@ -274,13 +347,13 @@ exports.getRelated = async (req, res) => {
 exports.popular = async (req, res) => {};
 
 exports.presell = async (req, res) => {
-  const presellCourses = await courseModel.find({ status : "پیش فروش" })
+  const presellCourses = await courseModel.find({ status: "پیش فروش" });
 
   if (!presellCourses) {
     return res.status(404).json({
-      message : "Not found course with this status !!"
-    })
+      message: "Not found course with this status !!",
+    });
   }
 
-  return res.json(presellCourses)
+  return res.json(presellCourses);
 };

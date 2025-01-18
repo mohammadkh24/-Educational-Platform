@@ -42,7 +42,7 @@ const schema = mongoose.Schema(
     },
     creator: {
       type: mongoose.Types.ObjectId,
-      ref: "users",
+      ref: "User",
       required: true,
     },
   },

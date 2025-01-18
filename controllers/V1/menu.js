@@ -64,7 +64,7 @@ exports.remove = async (req, res) => {
   const removeMenu = await menusModel.findOneAndDelete({ _id: id });
 
   if (!removeMenu) {
-    res.status(404).json({
+   return res.status(404).json({
       message: "Menu not found !!",
     });
   }

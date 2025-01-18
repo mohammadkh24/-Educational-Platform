@@ -15,6 +15,7 @@ const offRouter = require("./routes/V1/off");
 const articleRouter = require("./routes/V1/article");
 const ordersRouter = require("./routes/V1/order")
 const ticketsRouter = require("./routes/V1/ticket")
+const menusRouter = require("./routes/V1/menu")
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use("/v1/off", offRouter);
 app.use("/v1/articles", articleRouter);
 app.use("/v1/orders", ordersRouter);
 app.use("/v1/tickets", ticketsRouter);
+app.use("/v1/menus", menusRouter);
 
 // Not Found Page
 app.use((req, res) => {

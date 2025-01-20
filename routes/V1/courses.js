@@ -4,7 +4,6 @@ const multer = require("multer");
 const multerStorage = require("../../utils/uploader");
 const authMiddleware = require("./../../middlewares/auth");
 const isAdminMiddleware = require("./../../middlewares/isAdmin");
-const auth = require("./../../middlewares/auth");
 
 const router = express.Router();
 
@@ -17,7 +16,8 @@ router
     authMiddleware,
     isAdminMiddleware,
     coursesController.create
-  ).get(authMiddleware , isAdminMiddleware , coursesController.getAllCourses)
+  )
+  .get(authMiddleware, isAdminMiddleware, coursesController.getAllCourses);
 
 router.post(
   "/:id/sessions",

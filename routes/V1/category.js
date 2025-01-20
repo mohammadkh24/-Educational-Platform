@@ -16,3 +16,5 @@ router
   .put(authMiddleware, isAdminMiddleware, categoryController.update);
 
 module.exports = router;
+
+// App => route => Controller => Model

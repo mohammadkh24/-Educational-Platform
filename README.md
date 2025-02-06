@@ -1,50 +1,57 @@
-#  Educational-Platform System (Backend)
+# 🎓 Educational Platform System (Backend)
 
-This project is a **Educational-Platform System** built using **Express** and **MongoDB**. The system allows users to view, add, and delete books. It also provides functionality for user registration and login.
+Welcome to the **Educational Platform System** backend! This project is designed to manage online educational resources efficiently using **Node.js, Express.js, and MongoDB**.  
 
-## Prerequisites
+## 🚀 Features  
+✅ **User Authentication** (Register/Login with JWT)  
+✅ **Course Management** (Add, View, Update, Delete Courses)  
+✅ **Role-Based Access Control** (Admin & User)  
+✅ **Secure Password Hashing** with bcrypt  
+✅ **RESTful API with Validation**  
 
-To run this project, you need the following:
+---
 
-- **Node.js**: Version 14 or higher
-- **MongoDB**: For storing data (You can use a local database or cloud services like MongoDB Atlas)
-- **npm**: To install dependencies
+## ⚙️ Prerequisites  
+Make sure you have the following installed before running the project:  
+- **Node.js** (v14 or higher)  
+- **MongoDB** (Local or MongoDB Atlas)  
+- **npm** (Node Package Manager)  
 
-## Installation and Setup
+---
 
-1. **Clone the project**
+## 🛠 Installation & Setup  
 
-   First, clone the project from GitHub:
+### 1️⃣ Clone the repository  
+```bash
+git clone https://github.com/mohammadkh24/Educational-Platform.git
+cd Educational-Platform
+```
 
-   ```bash
-   https://github.com/mohammadkh24/-Educational-Platform.git
+### 2️⃣ Install dependencies  
+```bash
+npm install
+```
 
-2. **Install dependencies**
+### 3️⃣ Configure environment variables  
+Create a `.env` file in the root directory and add:  
+```ini
+PORT=4000
+MONGO_URI=mongodb://localhost:27017/EducationPlatform
+JWT_SECRET=JvjdsdW23fdsdskwedT
+```
 
-Navigate to the project directory and install the dependencies using npm:
+### 4️⃣ Start the server  
+For production:  
+```bash
+npm start
+```
+For development (with auto-reload using nodemon):  
+```bash
+npm run dev
+```
+---
 
-    cd Educational-Platform
-    npm install
+## 🤝 Contributing  
+Want to contribute? Fork the project, make your changes, and submit a pull request!  
 
-3. **Configure environment variables**
-
-Create a .env file in the root of the project and add the following values:
-
-     ```bash
-    PORT= 4000
-    MONGO_URI=mongodb://localhost:27017/EducationPlatform
-    JWT_SECRET=JvjdsdW23fdsdskwedT
-
-4. **Start the server**
-
-     Now, you can start the server:
-   
-        ```bash
-          npm start
-     Or for development mode:
-
-        npm run dev
-
-
-
-   
+🔹 Built with ❤️ using **Node.js, Express & MongoDB**  
